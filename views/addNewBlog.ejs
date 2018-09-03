@@ -1,0 +1,65 @@
+<% include ./partials/header %>
+<style media="screen">
+  body{
+    background-color: lightgrey;
+  }
+</style>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+<script>
+  $(document).ready(function () {
+    $("#myButton").click(function() {
+      //alert("Testing");
+      var blogTitle = $("#bTitle").val();
+      var blogSubTitle =$("#bSubtitle").val();
+      var comImage=$("#bImage").val();
+      var blog= CKEDITOR.instances.myEditor.getData();
+
+      var data={
+        blogTitle:blogTitle,
+        blogSubTitle:blogSubTitle,
+        comImage:comImage,
+        blog:blog
+      }
+
+      //console.log(blogTitle+ "----"+blogSubTitle+"------"+comImage+"-----"+blog+"------");
+      $post('addNewBlog',{data:data}).then(function (addedBlog) {
+        //console.log(addedBlog);
+        $("#bTitle").val("");
+        $("#bSubtitle").val("");
+        $("#bImage").val("");
+        CKEDITOR.instances.myEditor.setData("YOUR PREVIOUS BLOG HAS BEEN SAVED....<hr ADD NEW BLOG>");
+
+      })
+    });
+  });
+</script>
+<div class="container">
+  <form method="post" style="margin-top:100px">
+  <h1 style="text-align:center">Add New Blog</h1>
+  <div class="form-group">
+    <label for="bTitle">BlogTitle</label>
+    <input type="text" class="form-control" id="bTitle" placeholder="Title">
+  </div>
+
+  <div class="form-group">
+    <label for="bSubtitle">Blog Subtitle</label>
+    <input type="text" class="form-control" id="bSubtitle" placeholder="Title">
+  </div>
+
+  <div class="form-group">
+    <label for="bImage">Blog Commercial Image URL</label>
+    <input type="text" class="form-control" id="bImage" placeholder="Blog commercial Image URL">
+  </div>
+
+  <textarea name="editor1" id="myEditor"></textarea>
+  <button id="myButton" style="margin-top:20px" type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+</div>
+<script src="https://cdn.ckeditor.com/4.10.0/standard/ckeditor.js"></script>
+ <script>
+			CKEDITOR.replace( 'editor1' );
+ </script>
+<% include ./partials/footer %>

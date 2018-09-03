@@ -1,0 +1,64 @@
+
+    <% include ./partials/header %>
+
+    <!-- Page Header -->
+    <header class="masthead" style="background-image: url('https://images.pexels.com/photos/459688/pexels-photo-459688.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=350')">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <div class="site-heading">
+              <h1>My Blog</h1>
+              <span class="subheading">My Personal Blogs</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <div class="container">
+      <% posts.forEach(function(post){%>
+      <div class="row">
+        <div class="col-lg-3 mx-auto">
+          <img class="img-thumbnail" src="<%= post.comImage %>" alt="<%= post.title%>">
+
+        </div>
+        <div class="col-lg-9 mx-auto">
+          <div class="post-preview">
+
+            <a href="/blogs/post.id%>">
+              <h2 class="post-title">
+                <%= post.title %>
+              </h2>
+              <h3 class="post-Subtitle">
+                  <%= post.SubTitle %>
+              </h3>
+            </a>
+            <p class="post.meta">Posted by
+              <a href="#">Start Bootstrap</a>
+              <%= post.date %></p>
+          </div>
+          <hr>
+          <hr>
+          </div>
+          <% if (currentUser){%>
+            <div class="col-lg-1 mx-auto">
+              <a style="margin-top:20px" href="/blogs/<%=post.id%>" class="btn btn-outline-warning">Edit</a>
+              <form action="/blogs/<%=post._id%>?_method=DELETE" class="" action="index.html" method="POST">
+                <button style="margin-top:20px" class="btn btn-outline-danger">Delete</button>
+              </form>
+            </div>
+          <% }%>
+        </div>
+        <%}) %>
+          <!-- Pager -->
+          <div class="clearfix">
+            <a class="btn btn-primary float-right" href="#">Older Posts &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
+
+    <% include ./partials/footer %>
